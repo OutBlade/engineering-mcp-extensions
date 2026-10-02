@@ -1,0 +1,49 @@
+name: Publish VS Code and Open VSX extensions
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Package extensions
+        shell: bash
+        run: |
+          set -euo pipefail
+          for extension in ansys-lumerical-mcp ansys-mechanical-mcp ansys-fluent-mcp; do
+            (cd "$extension" && npx --yes @vscode/vsce package)
+          done
+
+      - name: Publish to Visual Studio Marketplace
+        shell: bash
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: |
+          set -euo pipefail
+          test -n "$VSCE_PAT" || { echo "Add the VSCE_PAT repository secret first."; exit 1; }
+          for extension in ansys-lumerical-mcp ansys-mechanical-mcp ansys-fluent-mcp; do
+            npx --yes @vscode/vsce publish --packagePath "$extension/$extension-0.1.0.vsix"
+          done
+
+      - name: Publish to Open VSX
+        shell: bash
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+        run: |
+          set -euo pipefail
+          test -n "$OVSX_PAT" || { echo "Add the OVSX_PAT repository secret first."; exit 1; }
+          for extension in ansys-lumerical-mcp ansys-mechanical-mcp ansys-fluent-mcp; do
+            npx --yes ovsx publish "$extension/$extension-0.1.0.vsix"
+          done

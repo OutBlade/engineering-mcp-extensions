@@ -27,3 +27,7 @@ VS Code's MCP extension API is required. Install the extension, open the Chat vi
 ## Building VSIX packages
 
 From each extension directory, run `npx --yes @vscode/vsce package`. The produced `.vsix` can be installed locally with `code --install-extension <file.vsix>`.
+
+## Publishing
+
+The manual GitHub Actions workflow publishes all three packages to both stores. Add `VSCE_PAT` (Marketplace: Manage scope) and `OVSX_PAT` (Open VSX access token) as repository Actions secrets, then run **Publish VS Code and Open VSX extensions** from the Actions tab. Never put either token in source control or chat.
