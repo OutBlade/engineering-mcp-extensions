@@ -1,0 +1,29 @@
+{
+  "name": "ansys-fluent-mcp",
+  "displayName": "Ansys Fluent MCP",
+  "description": "Connect VS Code Copilot to Ansys Fluent CFD with the PyFluent MCP server for solver workflows, mesh checks, and simulation reports.",
+  "version": "0.1.0",
+  "publisher": "OutBlade",
+  "license": "MIT",
+  "icon": "icon.png",
+  "homepage": "https://outblade.github.io/engineering-mcp-extensions/#fluent",
+  "repository": { "type": "git", "url": "https://github.com/OutBlade/engineering-mcp-extensions.git" },
+  "bugs": { "url": "https://github.com/OutBlade/engineering-mcp-extensions/issues" },
+  "files": ["extension.js", "package.json", "README.md", "CHANGELOG.md", "SUPPORT.md", "LICENSE", "icon.png"],
+  "engines": { "vscode": "^1.102.0" },
+  "categories": ["AI", "Machine Learning", "Other"],
+  "keywords": ["Ansys", "Fluent", "MCP", "Model Context Protocol", "CFD", "computational fluid dynamics", "fluid dynamics", "PyFluent", "mesh", "solver", "simulation", "Copilot"],
+  "galleryBanner": { "color": "#061C2B", "theme": "dark" },
+  "main": "./extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "mcpServerDefinitionProviders": [{ "id": "pyfluent", "label": "Ansys Fluent MCP" }],
+    "configuration": {
+      "title": "Ansys Fluent MCP",
+      "properties": {
+        "ansysFluentMcp.uvxExecutable": { "type": "string", "default": "uvx", "description": "Path or command name for uvx (installed with uv)." }
+      }
+    },
+    "commands": [{ "command": "ansysFluentMcp.openDocs", "title": "Ansys Fluent MCP: Open Setup Guide" }]
+  }
+}

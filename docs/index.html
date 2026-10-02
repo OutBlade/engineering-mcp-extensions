@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ansys MCP Extensions for VS Code | OutBlade</title>
+  <meta name="description" content="Connect GitHub Copilot Chat in VS Code to Ansys Lumerical, Mechanical and Fluent simulation tools with three focused MCP extensions.">
+  <meta name="keywords" content="Ansys MCP, VS Code MCP, Lumerical MCP, Mechanical MCP, Fluent MCP, photonics simulation, FEA, CFD, Copilot">
+  <meta name="theme-color" content="#07101f">
+  <link rel="canonical" href="https://outblade.github.io/engineering-mcp-extensions/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ansys MCP Extensions for VS Code">
+  <meta property="og:description" content="Photonic, structural and CFD simulation tools in Copilot Chat, through Ansys-maintained MCP servers.">
+  <meta property="og:url" content="https://outblade.github.io/engineering-mcp-extensions/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/OutBlade/engineering-mcp-extensions/main/ansys-lumerical-mcp/icon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"Ansys MCP Extensions for VS Code",
+    "description":"Three VS Code extensions that connect Copilot Chat to Ansys Lumerical, Mechanical and Fluent through MCP.",
+    "url":"https://outblade.github.io/engineering-mcp-extensions/",
+    "author":{"@type":"Person","name":"OutBlade"},
+    "hasPart":[
+      {"@type":"SoftwareApplication","name":"Ansys Lumerical MCP","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, Linux","url":"https://marketplace.visualstudio.com/items?itemName=OutBlade.ansys-lumerical-mcp"},
+      {"@type":"SoftwareApplication","name":"Ansys Mechanical MCP","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, Linux","url":"https://marketplace.visualstudio.com/items?itemName=OutBlade.ansys-mechanical-mcp"},
+      {"@type":"SoftwareApplication","name":"Ansys Fluent MCP","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, Linux","url":"https://marketplace.visualstudio.com/items?itemName=OutBlade.ansys-fluent-mcp"}
+    ]
+  }
+  </script>
+  <style>
+    :root{color-scheme:dark;--bg:#07101f;--panel:#0d1930;--panel2:#111f39;--line:#223554;--text:#edf4ff;--muted:#a7b6cd;--blue:#69c9ff;--violet:#b48aff;--gold:#ffd37b;--teal:#63e2d0}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#17335a 0,transparent 54%),var(--bg);color:var(--text);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    a{color:inherit}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid #ffffff18}.brand{font-weight:750;letter-spacing:.04em}.brand span{color:var(--blue)}.nav a{color:var(--muted);text-decoration:none;font-size:14px}
+    .hero{padding:90px 0 58px;text-align:center}.eyebrow{text-transform:uppercase;letter-spacing:.18em;color:var(--blue);font-size:12px;font-weight:750}.hero h1{max-width:900px;margin:18px auto 16px;font-size:clamp(38px,7vw,72px);line-height:1.04;letter-spacing:-.045em}.hero p{max-width:720px;margin:0 auto;color:var(--muted);font-size:18px}.hero .actions{display:flex;justify-content:center;gap:12px;margin-top:28px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:12px 18px;background:linear-gradient(135deg,#8c80ff,#58caff);color:#06111f;font-weight:750;text-decoration:none;border:1px solid transparent}.btn.secondary{background:transparent;color:var(--text);border-color:var(--line)}.section-title{margin:32px 0 18px;font-size:14px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{min-width:0;background:linear-gradient(160deg,#13213b,#0b1629);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 18px 48px #0003}.card img{display:block;width:88px;height:88px;object-fit:cover;border-radius:18px;margin:0 0 20px}.card h2{font-size:22px;margin:0 0 6px;letter-spacing:-.02em}.tag{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.card p{min-height:92px;color:var(--muted);margin:14px 0 20px}.card .links{display:flex;gap:10px;flex-wrap:wrap}.card .links a{font-size:13px;text-decoration:none;font-weight:700;color:#dbeaff;border-bottom:1px solid #69c9ff80;padding-bottom:3px}
+    .how{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 80px}.step{padding:18px;border:1px solid var(--line);border-radius:14px;background:#ffffff05}.step strong{display:block;margin-bottom:5px}.step span{color:var(--muted);font-size:14px}.faq{max-width:790px;margin:0 auto 90px}.faq h2{font-size:30px}.faq details{border-top:1px solid var(--line);padding:15px 0}.faq summary{cursor:pointer;font-weight:650}.faq p{color:var(--muted)}footer{border-top:1px solid #ffffff18;padding:24px 0 40px;color:var(--muted);font-size:13px}.foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    @media(max-width:820px){.grid{grid-template-columns:1fr}.card p{min-height:0}.how{grid-template-columns:1fr}.hero{padding-top:65px}.nav{padding:18px 0}}
+  </style>
+</head>
+<body>
+  <header class="wrap nav"><a class="brand" href="#top" aria-label="OutBlade home">OUT<span>BLADE</span> / ENGINEERING MCP</a><a href="https://github.com/OutBlade/engineering-mcp-extensions">Source and issue tracker ↗</a></header>
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Ansys simulation · MCP · VS Code</div>
+      <h1>Engineering simulation,<br>inside Copilot Chat.</h1>
+      <p>Bring photonics, structural analysis and computational fluid dynamics into your VS Code workflow. These lightweight extensions register Ansys-maintained MCP servers with VS Code's native server picker.</p>
+      <div class="actions"><a class="btn" href="#extensions">Explore the extensions</a><a class="btn secondary" href="https://github.com/OutBlade/engineering-mcp-extensions">View source on GitHub</a></div>
+    </section>
+    <p id="extensions" class="section-title">Choose your simulation workflow</p>
+    <section class="grid" aria-label="Ansys MCP extensions">
+      <article id="lumerical" class="card">
+        <img src="../ansys-lumerical-mcp/icon.png" alt="Integrated photonics resonator with luminous optical signal" width="88" height="88">
+        <div class="tag">Photonics · FDTD · MODE</div><h2>Ansys Lumerical MCP</h2>
+        <p>Connect Copilot Chat to Ansys Lumerical FDTD, MODE, DEVICE and INTERCONNECT for photonics and silicon-photonics simulation workflows.</p>
+        <div class="links"><a href="https://marketplace.visualstudio.com/items?itemName=OutBlade.ansys-lumerical-mcp">VS Code Marketplace</a><a href="https://open-vsx.org/extension/OutBlade/ansys-lumerical-mcp">Open VSX / Cursor</a><a href="https://github.com/ansys/pylumerical-mcp">Ansys server</a></div>
+      </article>
+      <article id="mechanical" class="card">
+        <img src="../ansys-mechanical-mcp/icon.png" alt="Finite-element beam under load with stress contours" width="88" height="88">
+        <div class="tag">FEA · Structural · Thermal</div><h2>Ansys Mechanical MCP</h2>
+        <p>Set up and inspect structural, thermal and modal analyses, manage Mechanical sessions, run solves and review exported results.</p>
+        <div class="links"><a href="https://marketplace.visualstudio.com/items?itemName=OutBlade.ansys-mechanical-mcp">VS Code Marketplace</a><a href="https://open-vsx.org/extension/OutBlade/ansys-mechanical-mcp">Open VSX / Cursor</a><a href="https://github.com/ansys/pymechanical-mcp">Ansys server</a></div>
+      </article>
+      <article id="fluent" class="card">
+        <img src="../ansys-fluent-mcp/icon.png" alt="Airfoil with cyan and teal computational fluid-dynamics streamlines" width="88" height="88">
+        <div class="tag">CFD · Fluid Dynamics</div><h2>Ansys Fluent MCP</h2>
+        <p>Explore Fluent settings, connect to a licensed solver, run validated workflows, inspect mesh quality and create simulation reports.</p>
+        <div class="links"><a href="https://marketplace.visualstudio.com/items?itemName=OutBlade.ansys-fluent-mcp">VS Code Marketplace</a><a href="https://open-vsx.org/extension/OutBlade/ansys-fluent-mcp">Open VSX / Cursor</a><a href="https://github.com/ansys/pyfluent-mcp">Ansys server</a></div>
+      </article>
+    </section>
+    <p class="section-title">Quick start</p>
+    <section class="how" aria-label="Setup steps">
+      <div class="step"><strong>1 · Install the extension</strong><span>Find the integration in VS Code Marketplace, or install the VSIX package locally.</span></div>
+      <div class="step"><strong>2 · Install Git and uv</strong><span>The extension starts the official server with `uvx` when you choose it in the MCP picker.</span></div>
+      <div class="step"><strong>3 · Connect your Ansys software</strong><span>Solver operations require a supported local Ansys installation and license. Review upstream version requirements.</span></div>
+    </section>
+    <section class="faq">
+      <h2>Questions</h2>
+      <details><summary>Do these extensions include or replace Ansys?</summary><p>No. Each extension registers the corresponding Ansys-maintained open-source MCP server. Ansys software, licensing and upstream Python requirements remain separate.</p></details>
+      <details><summary>What does MCP add to VS Code?</summary><p>The Model Context Protocol gives Copilot Chat a standard way to discover and call tools exposed by local engineering applications. VS Code starts the selected server when requested.</p></details>
+      <details><summary>Do I need an Ansys license to install the extension?</summary><p>You can install the extension without one. Live solver operations require the appropriate Ansys product and license. Some server capabilities may work without launching a solver.</p></details>
+    </section>
+  </main>
+  <footer><div class="wrap foot"><span>Independent community connectors by OutBlade. Not affiliated with or endorsed by Ansys.</span><a href="https://github.com/OutBlade/engineering-mcp-extensions">MIT source code · Support</a></div></footer>
+</body>
+</html>

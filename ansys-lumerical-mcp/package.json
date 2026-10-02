@@ -1,0 +1,29 @@
+{
+  "name": "ansys-lumerical-mcp",
+  "displayName": "Ansys Lumerical MCP",
+  "description": "Connect VS Code Copilot to Ansys Lumerical photonics simulation with the official PyLumerical MCP server.",
+  "version": "0.1.0",
+  "publisher": "OutBlade",
+  "license": "MIT",
+  "icon": "icon.png",
+  "homepage": "https://outblade.github.io/engineering-mcp-extensions/#lumerical",
+  "repository": { "type": "git", "url": "https://github.com/OutBlade/engineering-mcp-extensions.git" },
+  "bugs": { "url": "https://github.com/OutBlade/engineering-mcp-extensions/issues" },
+  "files": ["extension.js", "package.json", "README.md", "CHANGELOG.md", "SUPPORT.md", "LICENSE", "icon.png"],
+  "engines": { "vscode": "^1.102.0" },
+  "categories": ["AI", "Machine Learning", "Other"],
+  "keywords": ["Ansys", "Lumerical", "MCP", "Model Context Protocol", "photonics", "silicon photonics", "FDTD", "MODE", "DEVICE", "INTERCONNECT", "simulation", "Copilot"],
+  "galleryBanner": { "color": "#07152B", "theme": "dark" },
+  "main": "./extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "mcpServerDefinitionProviders": [{ "id": "pylumerical", "label": "Ansys Lumerical MCP" }],
+    "configuration": {
+      "title": "Ansys Lumerical MCP",
+      "properties": {
+        "ansysLumericalMcp.uvxExecutable": { "type": "string", "default": "uvx", "description": "Path or command name for uvx (installed with uv)." }
+      }
+    },
+    "commands": [{ "command": "ansysLumericalMcp.openDocs", "title": "Ansys Lumerical MCP: Open Setup Guide" }]
+  }
+}

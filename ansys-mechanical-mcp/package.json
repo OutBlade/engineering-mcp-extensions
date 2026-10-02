@@ -1,0 +1,29 @@
+{
+  "name": "ansys-mechanical-mcp",
+  "displayName": "Ansys Mechanical MCP",
+  "description": "Connect VS Code Copilot to Ansys Mechanical for structural, thermal, and modal simulation using PyMechanical MCP.",
+  "version": "0.1.0",
+  "publisher": "OutBlade",
+  "license": "MIT",
+  "icon": "icon.png",
+  "homepage": "https://outblade.github.io/engineering-mcp-extensions/#mechanical",
+  "repository": { "type": "git", "url": "https://github.com/OutBlade/engineering-mcp-extensions.git" },
+  "bugs": { "url": "https://github.com/OutBlade/engineering-mcp-extensions/issues" },
+  "files": ["extension.js", "package.json", "README.md", "CHANGELOG.md", "SUPPORT.md", "LICENSE", "icon.png"],
+  "engines": { "vscode": "^1.102.0" },
+  "categories": ["AI", "Machine Learning", "Other"],
+  "keywords": ["Ansys", "Mechanical", "MCP", "Model Context Protocol", "PyMechanical", "FEA", "finite element analysis", "structural analysis", "thermal analysis", "modal analysis", "simulation", "Copilot"],
+  "galleryBanner": { "color": "#19172A", "theme": "dark" },
+  "main": "./extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "mcpServerDefinitionProviders": [{ "id": "pymechanical", "label": "Ansys Mechanical MCP" }],
+    "configuration": {
+      "title": "Ansys Mechanical MCP",
+      "properties": {
+        "ansysMechanicalMcp.uvxExecutable": { "type": "string", "default": "uvx", "description": "Path or command name for uvx (installed with uv)." }
+      }
+    },
+    "commands": [{ "command": "ansysMechanicalMcp.openDocs", "title": "Ansys Mechanical MCP: Open Setup Guide" }]
+  }
+}
