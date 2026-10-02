@@ -30,4 +30,11 @@ From each extension directory, run `npx --yes @vscode/vsce package`. The produce
 
 ## Publishing
 
-The manual GitHub Actions workflow publishes all three packages to both stores. Add `VSCE_PAT` (Marketplace: Manage scope) and `OVSX_PAT` (Open VSX access token) as repository Actions secrets, then run **Publish VS Code and Open VSX extensions** from the Actions tab. Never put either token in source control or chat.
+Publishing follows the GDS Inspector release flow. Once the two publisher credentials are saved as repository Actions secrets, a `vscode-v<version>` tag automatically packages all three extensions, attaches the VSIX files to a GitHub Release, and publishes them to the VS Code Marketplace and Open VSX. A manual workflow run is available for first publication or recovery. If a store credential is missing, the GitHub Release still provides installable VSIX files and the workflow reports which store is pending.
+
+Set up the repository secrets once:
+
+- `VSCE_PAT`: a Microsoft Marketplace token with the **Marketplace: Manage** scope.
+- `OVSX_PAT`: an Open VSX access token. The publisher agreement must be accepted in the Open VSX account before publishing.
+
+Never put either token in source control or chat. Future releases need only a version bump and a `vscode-v<same-version>` tag; no one needs to package or upload each extension by hand.

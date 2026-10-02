@@ -1,0 +1,107 @@
+name: Release VS Code extensions
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "vscode-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      OVSX_PAT: ${{ secrets.OVSX_PAT }}
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check tag version and package extensions
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#vscode-v}"
+          if [[ "$version" == "$GITHUB_REF_NAME" ]]; then
+            version=$(node -p "require('./ansys-lumerical-mcp/package.json').version")
+            echo "Manual run: publishing package version $version."
+          fi
+          for extension in ansys-lumerical-mcp ansys-mechanical-mcp ansys-fluent-mcp; do
+            package_version=$(node -p "require('./$extension/package.json').version")
+            [[ "$package_version" == "$version" ]] || {
+              echo "$extension is $package_version, but tag requests $version."; exit 1;
+            }
+            (cd "$extension" && npx --yes @vscode/vsce package)
+          done
+
+      - name: Create GitHub release with VSIX packages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#vscode-v}"
+          if [[ "$version" == "$GITHUB_REF_NAME" ]]; then version=$(node -p "require('./ansys-lumerical-mcp/package.json').version"); fi
+          tag="vscode-v$version"
+          packages=(
+            "ansys-lumerical-mcp/ansys-lumerical-mcp-$version.vsix"
+            "ansys-mechanical-mcp/ansys-mechanical-mcp-$version.vsix"
+            "ansys-fluent-mcp/ansys-fluent-mcp-$version.vsix"
+          )
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" "${packages[@]}" --clobber
+          else
+            gh release create "$tag" "${packages[@]}" --target "$GITHUB_SHA" \
+              --title "Ansys MCP Extensions $version" \
+              --notes "Three VS Code MCP integrations for Ansys Lumerical, Mechanical and Fluent. Install a VSIX from VS Code or a compatible editor using Extensions → Install from VSIX."
+          fi
+
+      - name: Report missing publishing credentials
+        shell: bash
+        run: |
+          if [[ -z "$VSCE_PAT" ]]; then echo "::warning::VSCE_PAT is missing; Microsoft Marketplace publication is pending."; fi
+          if [[ -z "$OVSX_PAT" ]]; then echo "::warning::OVSX_PAT is missing; Open VSX publication is pending."; fi
+
+      - name: Publish to Visual Studio Marketplace
+        if: env.VSCE_PAT != ''
+        id: marketplace
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#vscode-v}"
+          if [[ "$version" == "$GITHUB_REF_NAME" ]]; then version=$(node -p "require('./ansys-lumerical-mcp/package.json').version"); fi
+          for extension in ansys-lumerical-mcp ansys-mechanical-mcp ansys-fluent-mcp; do
+            npx --yes @vscode/vsce publish --packagePath "$extension/$extension-$version.vsix" --pat "$VSCE_PAT"
+          done
+
+      - name: Create Open VSX namespace
+        if: env.OVSX_PAT != ''
+        continue-on-error: true
+        shell: bash
+        run: npx --yes ovsx create-namespace OutBlade --pat "$OVSX_PAT"
+
+      - name: Publish to Open VSX
+        if: env.OVSX_PAT != ''
+        id: openvsx
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#vscode-v}"
+          if [[ "$version" == "$GITHUB_REF_NAME" ]]; then version=$(node -p "require('./ansys-lumerical-mcp/package.json').version"); fi
+          for extension in ansys-lumerical-mcp ansys-mechanical-mcp ansys-fluent-mcp; do
+            npx --yes ovsx publish "$extension/$extension-$version.vsix" --pat "$OVSX_PAT"
+          done
+
+      - name: Check publication results
+        if: steps.marketplace.outcome == 'failure' || steps.openvsx.outcome == 'failure'
+        run: exit 1
