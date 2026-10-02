@@ -44,6 +44,7 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$OVSX_PAT" || { echo "Add the OVSX_PAT repository secret first."; exit 1; }
+          npx --yes ovsx create-namespace OutBlade -p "$OVSX_PAT"
           for extension in ansys-lumerical-mcp ansys-mechanical-mcp ansys-fluent-mcp; do
             npx --yes ovsx publish "$extension/$extension-0.1.0.vsix"
           done
