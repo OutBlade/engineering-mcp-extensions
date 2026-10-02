@@ -4,6 +4,9 @@ Connect VS Code Copilot Chat to Ansys simulation software with three carefully s
 
 **Project site:** [engineering-mcp-extensions](https://outblade.github.io/engineering-mcp-extensions/)
 
+[![Latest release](https://img.shields.io/github/v/release/OutBlade/engineering-mcp-extensions?style=flat-square&color=5b6cf5)](https://github.com/OutBlade/engineering-mcp-extensions/releases/latest)
+[![Release workflow](https://img.shields.io/github/actions/workflow/status/OutBlade/engineering-mcp-extensions/release-extensions.yml?style=flat-square&label=release)](https://github.com/OutBlade/engineering-mcp-extensions/actions/workflows/release-extensions.yml)
+
 | Lumerical | Mechanical | Fluent |
 | --- | --- | --- |
 | ![Lumerical photonics icon](ansys-lumerical-mcp/icon.png) | ![Mechanical FEA icon](ansys-mechanical-mcp/icon.png) | ![Fluent CFD icon](ansys-fluent-mcp/icon.png) |
@@ -12,9 +15,9 @@ Three focused VS Code integrations that register Ansys-maintained MCP servers in
 
 | Extension | Ansys product | MCP server |
 | --- | --- | --- |
-| Ansys Lumerical MCP | Photonics simulation (FDTD, MODE, DEVICE, INTERCONNECT) | [ansys/pylumerical-mcp](https://github.com/ansys/pylumerical-mcp) |
-| Ansys Mechanical MCP | Structural, thermal, and modal simulation | [ansys/pymechanical-mcp](https://github.com/ansys/pymechanical-mcp) |
-| Ansys Fluent MCP | CFD and fluid simulation | [ansys/pyfluent-mcp](https://github.com/ansys/pyfluent-mcp) |
+| Ansys Lumerical MCP | Photonics simulation (FDTD, MODE, DEVICE, INTERCONNECT) | [VSIX release](https://github.com/OutBlade/engineering-mcp-extensions/releases/latest) · [ansys/pylumerical-mcp](https://github.com/ansys/pylumerical-mcp) |
+| Ansys Mechanical MCP | Structural, thermal, and modal simulation | [VSIX release](https://github.com/OutBlade/engineering-mcp-extensions/releases/latest) · [ansys/pymechanical-mcp](https://github.com/ansys/pymechanical-mcp) |
+| Ansys Fluent MCP | CFD and fluid simulation | [VSIX release](https://github.com/OutBlade/engineering-mcp-extensions/releases/latest) · [ansys/pyfluent-mcp](https://github.com/ansys/pyfluent-mcp) |
 
 Each extension contributes a native VS Code MCP server provider. Install [uv](https://docs.astral.sh/uv/) (provides `uvx`) and Git first. On first start, `uvx` fetches the corresponding server from Ansys' public GitHub repository. The local Ansys product and a valid license are still needed for solver operations. Check each server's upstream documentation for its supported Python and product versions.
 
